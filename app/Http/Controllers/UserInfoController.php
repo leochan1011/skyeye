@@ -18,7 +18,7 @@ class UserInfoController extends Controller
         
         if(hash::check($pw,$aa[0])){
 
-            return $login->get();
+            return json_decode($login->get(),true);
         };
         
         //return response()->json($user);
