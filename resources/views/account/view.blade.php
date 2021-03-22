@@ -14,7 +14,7 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
-  dd('$users')
+  
   <table class="table">
     <thead>
         <tr class="table-warning">
@@ -29,14 +29,14 @@
     <tbody>
         @foreach($user as $users)
         <tr>
-            <td>{{$users->id}}</td>
-            <td>{{$users->name}}</td>
-            <td>{{$users->role}}</td>
-            <td>{{$users->sid}}</td>
-            <td>{{$users->password}}</td>
+            <td>{{$users->UserID}}</td>
+            <td>{{$users->UNAME}}</td>
+            <td>{{$users->Role}}</td>
+            <td>{{$users->SID}}</td>
+            <td>{{$users->PWD}}</td>
             <td class="text-center">
-                <a href="{{ route('users.edit', $users->id)}}" class="btn btn-primary btn-sm"">Edit</a>
-                <form action="{{ route('users.destroy', $users->id)}}" method="post" style="display: inline-block">
+                <a href="{{ route('users.edit', $users->UserID)}}" class="btn btn-primary btn-sm">Edit</a>
+                <form action="{{ route('users.destroy', $users->UserID)}}" method="post" style="display: inline-block">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm"" type="submit">Delete</button>

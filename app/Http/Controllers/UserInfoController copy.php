@@ -15,26 +15,32 @@ class UserInfoController extends Controller
         $login = DB::table('users')->where([['name', $name]]);
         //$passw = $login->addSelect('password')->get()->keyBy('password');
         $aa = $login->get()->pluck('password')->toArray();
-        
-        if(hash::check($pw,$aa[0])){
+        if($login->count() >0){
+            if(hash::check($pw,$aa[0])){
 
-            return json_decode($login->get(),true);
-        };
+                return json_decode($login->get(),true);
+            } else{
+                $error = array('status'=>1);
+                return $error; 
+            }
+        } else{
+            $error = array('status'=>1);
+            return $error;
+        }
         
-        //return response()->json($user);
     }
     public function index()
     {
         // $users = DB::select('select * from users ', [1]);
         // return view('user_info', ['users' => $users]);
         $user = User::all();
-        return view('index',compact('user'));
+        return view('account.view',compact('user'));
 
     }
 
     public function create()
     {
-        return view('create');
+        return view('account.create');
     }
 
     public function store(Request $request)
@@ -63,7 +69,7 @@ class UserInfoController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('edit', compact('user'));
+        return view('account.edit', compact('user'));
     }
 
     public function update(Request $request, $id)

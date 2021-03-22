@@ -35,10 +35,10 @@
                 </div>
                 <div class="form-group">
                     <label for="role">Role</label>
-                    <select name="role" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">>
+                    <select name="role" class="form-control" name="role" >
                       <option selected ></option>
                       <option>admin</option>
-                      <option>crew</option>
+                      <option>user</option>
                     </select>
 
                 </div>

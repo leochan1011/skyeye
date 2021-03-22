@@ -17,24 +17,29 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('users.update', $user->id) }}">
+      <form method="post" action="{{ route('users.update', $user->UserID) }}">
           <div class="form-group">
               @csrf
               @method('PATCH')
               <label for="name">User name</label>
-              <input type="text" class="form-control" name="name" value="{{ $user->name }}"/>
+              <input type="text" class="form-control" name="name" value="{{ $user->UNAME }}"/>
           </div>
           <div class="form-group">
               <label for="sid">Stuff ID</label>
-              <input type="text" class="form-control" name="sid" value="{{ $user->sid }}"/>
+              <input type="text" class="form-control" name="sid" value="{{ $user->SID }}"/>
           </div>
           <div class="form-group">
               <label for="role">Role</label>
-              <input type="text" class="form-control" name="role" value="{{ $user->role }}"/>
+              <select name="role" class="form-control" name="role" value="{{ $user->Role }}" >
+                <option selected ></option>
+                <option>admin</option>
+                <option>user</option>
+              </select>
+
           </div>
           <div class="form-group">
               <label for="password">Password</label>
-              <input type="text" class="form-control" name="password" value="{{ $user->password }}"/>
+              <input type="text" class="form-control" name="password" value="{{ $user->PWD }}"/>
           </div>
           <button type="submit" class="btn btn-block btn-danger">Update User</button>
       </form>

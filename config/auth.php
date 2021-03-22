@@ -62,19 +62,20 @@ return [
     | be assigned to any extra authentication guards you have defined.
     |
     | Supported: "database", "eloquent"
-    |
+    |   
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
+        //'users' => [
+            //'driver' => 'eloquent',
+            //'model' => App\Models\User::class,
+        //],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'database',
+            // 'table' => 'users',
+            'table' => 'UserAccount',
+        ],
     ],
 
     /*
@@ -111,7 +112,7 @@ return [
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */
-
-    'password_timeout' => 10800,
+    // User will timeoiut after a hour
+    'password_timeout' => 3600,
 
 ];
