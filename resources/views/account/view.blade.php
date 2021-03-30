@@ -20,26 +20,25 @@
         <tr class="table-warning">
           <td>ID</td>
           <td>Name</td>
-          <td>Role</td>
           <td>Stuff ID</td>
-          <td>Password</td>
+          <td>Role</td>
+
           <td class="text-center">Action</td>
         </tr>
     </thead>
     <tbody>
         @foreach($user as $users)
         <tr>
-            <td>{{$users->UserID}}</td>
+            <td>{{$users->id}}</td>
             <td>{{$users->UNAME}}</td>
-            <td>{{$users->Role}}</td>
             <td>{{$users->SID}}</td>
-            <td>{{$users->PWD}}</td>
+            <td>{{$users->Role}}</td>
             <td class="text-center">
-                <a href="{{ route('users.edit', $users->UserID)}}" class="btn btn-primary btn-sm">Edit</a>
-                <form action="{{ route('users.destroy', $users->UserID)}}" method="post" style="display: inline-block">
+                <a href="{{ route('users.edit', $users->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                <form action="{{ route('users.destroy', $users->id)}}" method="post" onsubmit="return confirm('Do you really want to delete this entry?');" style="display: inline-block">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger btn-sm"" type="submit">Delete</button>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                   </form>
             </td>
         </tr>

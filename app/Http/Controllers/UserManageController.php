@@ -52,7 +52,7 @@ class UserManageController extends Controller
         ]);
         $user = DB::table('UserAccount')->insert([
             'uname' => $storeData['name'],
-            'PWD' => Hash::make($storeData['password']),
+            'password' => Hash::make($storeData['password']),
             'SID' => $storeData['sid'],
             'Role' => $storeData['role'],
         ]);
@@ -67,7 +67,7 @@ class UserManageController extends Controller
 
     public function edit($UserID)
     {
-        $user = DB::select("select * from UserAccount WHERE UserID = '$UserID'" );
+        $user = DB::select("select * from UserAccount WHERE id = '$UserID'" );
         return view('account.edit', ['user' => $user[0]]);
         //$user = User::findOrFail($id);
         //return view('account.edit', compact('user'));
@@ -81,7 +81,7 @@ class UserManageController extends Controller
             'sid' => 'required|numeric',
             'password' => 'required|max:255',
         ]);
-        DB::table('UserAccount')->where('UserID', $UserID)->update([
+        DB::table('UserAccount')->where('id', $UserID)->update([
             'uname' => $updateData['name'],
             'PWD' => Hash::make($updateData['password']),
             'SID' => $updateData['sid'],
@@ -93,7 +93,7 @@ class UserManageController extends Controller
     public function destroy($UserID)
     {
         //$user = DB::table('UserAccount')->findOrFail($UserID);
-        $user = DB::table('UserAccount')->where('UserID', $UserID)->delete();
+        $user = DB::table('UserAccount')->where('id', $UserID)->delete();
         //$user->delete();
 
         return redirect('/users')->with('completed', 'User has been deleted');

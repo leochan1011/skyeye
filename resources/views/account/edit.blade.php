@@ -17,7 +17,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('users.update', $user->UserID) }}">
+      <form method="post" action="{{ route('users.update', $user->id) }}">
           <div class="form-group">
               @csrf
               @method('PATCH')
@@ -39,7 +39,7 @@
           </div>
           <div class="form-group">
               <label for="password">Password</label>
-              <input type="text" class="form-control" name="password" value="{{ $user->PWD }}"/>
+              <input type="text" class="form-control" name="password" />
           </div>
           <button type="submit" class="btn btn-block btn-danger">Update User</button>
       </form>
