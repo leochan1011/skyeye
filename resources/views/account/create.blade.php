@@ -43,7 +43,7 @@
 
                 </div>
 
-                <button type="submit" class="btn btn-block btn-danger">Create User</button>
+                <button type="submit" class="btn btn-block btn-primary">Create User</button>
             </form>
         </div>
       </div>

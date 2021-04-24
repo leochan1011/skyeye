@@ -61,13 +61,17 @@
             padding: 16px;
         }
     </style>
+    <!-- jquery 3.6 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/34e85e76cb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
 
         <!-- Navigation bar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <button class="openbtn btn btn-link mr-3 shadow-sm" onclick="openNav()">
+            <button class="openbtn btn btn-link shadow-sm" onclick="openNav()">
                 <span class="navbar-toggler-icon "></span>
             </button>  
             <div class="container">
@@ -107,13 +111,14 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->UNAME }}
+                                    <i class="fas fa-user"></i>  {{ Auth::user()->UNAME }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i>
                                         {{ __('Logout') }}
                                     </a>
 
@@ -136,22 +141,22 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle pl-4" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Management
+                        <i class="fas fa-user-cog"></i> Management
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Create User</a>
-                      <a class="dropdown-item" href="#">View/Eidt User</a>
-                      <a class="dropdown-item" href="#">Create Drone</a>
+                        <a class="dropdown-item" href="{{ url('/users/create') }}"><i class="fas fa-user-plus"></i> Create User</a>
+                        <a class="dropdown-item" href="{{ url('/users') }}"><i class="fas fa-user-edit"></i> View/Eidt User</a>
+                        <a class="dropdown-item" href="{{ url('/drone/create') }}"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Create Drone</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="#">View Mission</a>
+                    <a href="{{ url('/mission') }}"><i class="fas fa-map-marked-alt"></i> View Mission</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Dashborad</a>
+                    <a href="{{ url('/dv') }}"><i class="fas fa-poll"></i> Dashborad</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Contact</a>
+                    <a href="{{ url('/intro') }}"><i class="fab fa-battle-net"></i> Introduction</a>
                 </li>
             </ul>
             

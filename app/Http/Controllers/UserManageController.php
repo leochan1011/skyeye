@@ -83,7 +83,7 @@ class UserManageController extends Controller
         ]);
         DB::table('UserAccount')->where('id', $UserID)->update([
             'uname' => $updateData['name'],
-            'PWD' => Hash::make($updateData['password']),
+            'password' => Hash::make($updateData['password']),
             'SID' => $updateData['sid'],
             'Role' => $updateData['role'],
         ]);
