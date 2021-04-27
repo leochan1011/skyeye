@@ -52,5 +52,6 @@ Route::get('/mission/{id}', [MissionController::class, 'show']);
 Route::get('/dv', [MissionreportController::class, 'report']);
 
 Route::get('/mission_count', [MissionController::class, 'getMissionCount'])->name('mission_count');
+Route::get('/mission_count2', [MissionController::class, 'getMissionCount2'])->name('mission_count2');
 Route::get('/barchart_count', [MissionreportController::class,'barchart'])->name('barchart_count');
 Route::get('/mitt', [MissionController::class, 'test'])->name('test');

@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-3">
     <div class="col-md-4">
-        <div class="card shadow-sm mr-3">
+        <div class="card shadow-sm">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
                 <li class="nav-item">
@@ -16,7 +16,7 @@
                 <div class="tab-content">
                 <div class="tab-pane active" id="month" role="tabpanel">
                     <div>
-                        <canvas id="doughnut-chart" height="300"></canvas>
+                        <canvas id="doughnut-chart" height="315"></canvas>
                     </div>
                 </div>    
                 </div>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="col-md-8">
-        <div class="card shadow-sm ml-3">
+        <div class="card shadow-sm">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
                 <li class="nav-item">
@@ -62,14 +62,14 @@
         <div class="tab-content mt-3">
         <div class="tab-pane active" id="month" role="tabpanel">
             <div class="row justify-content-center pb-3">
-                <canvas id="myChart" width="250" height="250"></canvas>
+                <canvas id="myChart" width="250" height="350"></canvas>
             </div>
         </div>
         {{-- <div class="tab-pane" id="day" role="tabpanel" aria-labelledby="day-tab">  
             <div class="row justify-content-center pb-3">
-                <div id="myChart" width="250" height="250"></div>
+                <div id="myChart2" width="250" height="250"></div>
             </div>
-        </div> --}}      
+        </div>       --}}
         </div>
     </div>
 </div>
@@ -91,7 +91,7 @@
         <div class="tab-content">
             <div class="tab-pane active" id="month" role="tabpanel">
                 <div>            
-                    <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div>
+                    {{-- <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div> --}}
                 </div>
             </div>    
         </div>
@@ -104,20 +104,45 @@
 <script>
 // time series
 var plot = function(count) {
-    var ctx = $('#myChart');
-    ctx[0].height = 500;
+    var canvas = document.getElementById('myChart');
+    var ctx = canvas.getContext("2d");
     data = count.count;
     labels =  count.label;
+
+    // gradient color setting
+    var gradient = ctx.createLinearGradient(0, 0, 0, 350);
+    gradient.addColorStop(0, 'rgba(0, 153, 153, 1)');   
+    gradient.addColorStop(1, 'rgba(0, 153, 153, 0)');
  
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
             datasets: [{
-                backgroundColor: 'rgba(255, 119, 0, 0.5)',
-                borderColor: 'rgba(255, 119, 0, 1)',
-                label: 'Count in Month',
+                backgroundColor: gradient,
+                borderColor: gradient,
+                fill: true,
+                lineTension: 0.1,
+                pointRadius: 4,
+                label: 'Total',
                 data: data,
+            },
+            {
+                fill: false,
+                borderColor: 'rgba(64, 36, 203, 1)',
+                lineTension: 0.1,
+                pointRadius: 4,
+                label: 'Creator 1',
+                data: count.count1,
+            },
+            {
+                fill: false,
+                lineTension: 0.1,
+                borderColor: 'rgba(203, 36, 36, 1)',
+                pointBackgroundColor: "white",
+                pointRadius: 4,
+                label: 'Creator 2',
+                data: count.count2,
             }]
         },
         options: {
@@ -149,7 +174,7 @@ var plot = function(count) {
             },
             title:{
                 display: true,
-                text: 'Mission Frequency'
+                text: 'Mission Frequency in Month'
             },
             responsive: true,
             maintainAspectRatio: false,
@@ -167,6 +192,7 @@ $.ajax({
     console.log(data);
     plot(data);
 });
+
 
 // Pie chart
 new Chart(document.getElementById("doughnut-chart"), {
@@ -265,6 +291,10 @@ var bar_plot = function(count) {
                         labelString: 'District'
                     },
                 }]
+            },
+            title: {
+                display: true,
+                text: '18 District Mission Distribution'
             }
         }
     });

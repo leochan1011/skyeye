@@ -29,34 +29,52 @@ class MissionController extends Controller
     }
 
     public function getMissionCount() {
-        $data =  DB::table('Mission');
         // monthly
-        $data1 = $data
+        $data = DB::table('Mission')
         ->select(DB::raw('count(*) as `count`'),  DB::raw('min(date(MCreateTime)) as date'))//,DB::raw('YEAR(MCreateTime) year'),DB::raw('MONTH(MCreateTime) month'),DB::raw('DAY(MCreateTime) day'))
         ->groupBy(DB::raw('YEAR(MCreateTime)'), DB::raw('MONTH(MCreateTime)'))
         ->orderBy('date')
         // ->whereMonth('MCreateTime', '<>', 3)
         ->get();
 
-        //Day
-        $data2 = $data
-        ->select(DB::raw('count(*) as `count`'),  DB::raw('min(date(MCreateTime)) as date'))//,DB::raw('YEAR(MCreateTime) year'),DB::raw('MONTH(MCreateTime) month'),DB::raw('DAY(MCreateTime) day'))
-        ->groupBy(DB::raw('YEAR(MCreateTime)'), DB::raw('MONTH(MCreateTime)'), DB::raw('DAY(MCreateTime)'))
+        $count = $data->pluck('count');
+        $label = $data->pluck('date');
+
+        $data1 =  DB::table('Mission')
+        ->select(DB::raw('count(*) as `count`'),  DB::raw('min(date(MCreateTime)) as date'))
+        ->groupBy(DB::raw('YEAR(MCreateTime)'), DB::raw('MONTH(MCreateTime)'))
+        ->where('MCreator','=',1)
         ->orderBy('date')
         ->get();
 
-        $count = $data1->pluck('count');
-        $label = $data1->pluck('date');
+        $count1 = $data1->pluck('count');
 
-        $count_day = $data2->pluck('count');
-        $label_day = $data2->pluck('date');
+        $data2 = DB::table('Mission')
+        ->select(DB::raw('count(*) as `count`'),  DB::raw('min(date(MCreateTime)) as date'))
+        ->groupBy(DB::raw('YEAR(MCreateTime)'), DB::raw('MONTH(MCreateTime)'))
+        ->where('MCreator','=',2)
+        ->orderBy('date')
+        ->get();
+
+        $count2 = $data2->pluck('count');
+        //Day
+        // $data2 = $data
+        // ->select(DB::raw('count(*) as `count`'),  DB::raw('min(date(MCreateTime)) as date'))//,DB::raw('YEAR(MCreateTime) year'),DB::raw('MONTH(MCreateTime) month'),DB::raw('DAY(MCreateTime) day'))
+        // ->groupBy(DB::raw('YEAR(MCreateTime)'), DB::raw('MONTH(MCreateTime)'), DB::raw('DAY(MCreateTime)'))
+        // ->orderBy('date')
+        // ->get();
+
+
+
+        // $count_day = $data2->pluck('count');
+        // $label_day = $data2->pluck('date');
 
 
         return [
             'count' => $count,
             'label' => $label,
-            'count_day' => $count_day,
-            'label_day' => $label_day,
+            'count1' => $count1,
+            'count2' => $count2,
         ];
     }
 
@@ -67,7 +85,6 @@ class MissionController extends Controller
         ->orderBy('date')
         ->get();
         return $data;
-        
     }
 
 }
