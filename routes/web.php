@@ -7,6 +7,8 @@ use App\Http\Controllers\DroneManageController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MissionController;
+use App\Http\Controllers\MissionreportController;
+use Illuminate\Support\Facades\DB;
 
 
 /*
@@ -22,7 +24,14 @@ use App\Http\Controllers\MissionController;
 
 
 Route::get('/test', function () {
-    return view('test');
+    $data = DB::table('Mission')->select(DB::raw('`MLocationName`,count(`MLocationName`) as `count`'))
+                     ->whereNotNull('MLocationName')->Groupby('MLocationName')->orderByDesc('count')->get();
+    $district = $data->pluck('MLocationName');
+    $count = $data->pluck('count');
+    //return ['district'=>$district,
+            //'count'=>$count];
+    return view('test',['district'=>$district,
+    'count'=>$count]);
 });
 
 Route::get('/intro', function () {
@@ -39,12 +48,9 @@ Route::get('/user/username={name} pw={pw}',[UserInfoController::class, 'self']);
 Route::get('/mission', [MissionController::class, 'index'])->middleware('auth');
 Route::get('/mission/{id}', [MissionController::class, 'show']);
 
-Route::get('/missionGet_token={pw}%status={code}', );
 
-Route::get('/dv', function() {
-    return view('datavisualization');
-});
+Route::get('/dv', [MissionreportController::class, 'report']);
 
 Route::get('/mission_count', [MissionController::class, 'getMissionCount'])->name('mission_count');
-
+Route::get('/barchart_count', [MissionreportController::class,'barchart'])->name('barchart_count');
 Route::get('/mitt', [MissionController::class, 'test'])->name('test');

@@ -107,7 +107,7 @@
             <div class="card-content">
               <h2>Skyeye Introduction</h2>
               <div class="icon-block mt-5">
-                <a class="btn btn-outline-primary shadow-sm" href="{{ url('/intro') }}" role="button">View</a>
+                <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/intro') }}" role="button">View</a>
               </div>
             </div>
         </div>
@@ -124,8 +124,8 @@
             <div class="card-content">
                     <h2>User Management</h2>
                         <div class="icon-block mt-5">
-                            <a class="btn btn-outline-primary mr-2 shadow-sm" href="{{ url('/users/create') }}" role="button">Create</a>
-                            <a class="btn btn-outline-secondary md-2 shadow-sm" href="{{ url('/users') }}" role="button">View & Edit</a>
+                            <a class="btn btn-outline-primary mr-2 btn-lg shadow-sm" href="{{ url('/users/create') }}" role="button">Create</a>
+                            <a class="btn btn-outline-secondary md-2 btn-lg shadow-sm" href="{{ url('/users') }}" role="button">View & Edit</a>
                         </div>
                     </div>
             </div>
@@ -143,8 +143,8 @@
           <div class="card-content">
             <h2>Drone Management</h2>
             <div class="icon-block mt-5">
-              <a class="btn btn-outline-primary mr-2 shadow-sm" href="{{ url('/drone/create') }}" role="button">Create</a>
-              <a class="btn btn-outline-secondary md-2 shadow-sm" href="{{ url('/drone') }}" role="button">View & Edit</a>
+              <a class="btn btn-outline-primary mr-2 btn-lg shadow-sm" href="{{ url('/drone/create') }}" role="button">Create</a>
+              <a class="btn btn-outline-secondary md-2 btn-lg shadow-sm" href="{{ url('/drone') }}" role="button">View & Edit</a>
             </div>
           </div>
         </div>
@@ -160,9 +160,9 @@
                     <i class="fas fa-map-marked-alt fa-3x profile"></i>
             </div>
             <div class="card-content">
-                    <h2>Mission Record</h3>
+                    <h2>Mission Record</h2>
                         <div class="icon-block mt-5">
-                            <a class="btn btn-outline-primary" href="{{ url('/mission') }}" role="button">View</a>
+                            <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/mission') }}" role="button">View</a>
                         </div>
                     </div>
             </div>
@@ -175,16 +175,35 @@
               <div class="background"></div>
           </div>
           <div class="profile-thumb-block" style="font-size: 25px;">
-                  <i class="fas fa-poll fa-3x profile"></i>
+            <i class="fas fa-poll fa-3x profile"></i>
           </div>
           <div class="card-content">
-          <h2>Data Visualization</h3>
+          <h2>Data Visualization</h2>
             <div class="icon-block mt-5">
-              <a class="btn btn-outline-primary" href="{{ url('/dv') }}" role="button">View</a>
+              <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/dv') }}" role="button">View</a>
             </div>
           </div>
       </div>
     </div>
+
+    <!--Profile Card 6 coming soon-->
+    <div class="col-md-4">
+      <div class="card profile-card-3 shadow">
+          <div class="background-block" style="background-image:linear-gradient(to top right,#f7f45a, #3fece4);">
+              <div class="background"></div>
+          </div>
+          <div class="profile-thumb-block" style="font-size: 23px;">
+            <i class="fab fa-skyatlas fa-3x profile"></i>
+          </div>
+          <div class="card-content">
+          <h2>FYP2021 Future</h2>
+            <div class="icon-block mt-5">
+              <a class="btn btn-outline-primary btn-lg disabled" href="#" role="button" tabindex="-1" aria-disabled="true">Coming Soon</a>
+            </div>
+          </div>
+      </div>
+    </div>
+
   </div>
 </div>
 @endsection

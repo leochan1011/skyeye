@@ -2,6 +2,50 @@
 
 @section('content')
 
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow-sm mr-3">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Doughnut Chart</a>
+                </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                <div class="tab-pane active" id="month" role="tabpanel">
+                    <div>
+                        <canvas id="doughnut-chart" height="300"></canvas>
+                    </div>
+                </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow-sm ml-3">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" role="tab" aria-controls="bar" aria-selected="true">Bar Chart</a>
+                </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                <div class="tab-pane active" id="bar" role="tabpanel">
+                    <div>
+                        <canvas id="bar_chart" width="250" height="250"></canvas>
+                    </div>
+                </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <div class="card shadow-sm mb-3">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
@@ -30,52 +74,27 @@
     </div>
 </div>
 
-<div class="row justify-content-center">
-
-    <div class="card shadow-sm mr-3">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+<div class="card shadow-sm mt-3">
+    <div class="card-header d-flex justify-content-between">
+        <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Doughnut Chart</a>
+                <a class="nav-link active" href="#" role="tab" aria-controls="month" aria-selected="true">Heat Map</a>
             </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <div class="tab-content">
+        </ul>
+        <div class="panel">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeGradient()">Change gradient</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeRadius()">Change radius</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeOpacity()">Change opacity</button>
+        </div> 
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
             <div class="tab-pane active" id="month" role="tabpanel">
-                <div>
-                    <canvas id="doughnut-chart" height="300"></canvas>
+                <div>            
+                    <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div>
                 </div>
             </div>    
-            </div>
         </div>
-    </div>
- 
-    <div class="card shadow-sm ml-3">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Doughnut Chart2</a>
-            </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <div class="tab-content">
-            <div class="tab-pane active" id="month" role="tabpanel">
-                <div>
-                    <canvas id="doughnut-chart"></canvas>
-                </div>
-            </div>    
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<div class="container-w100">
-    <div>               
-        {{-- <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div> --}}
     </div>
 </div>
 
@@ -83,7 +102,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 <script>
-
+// time series
 var plot = function(count) {
     var ctx = $('#myChart');
     ctx[0].height = 500;
@@ -138,6 +157,7 @@ var plot = function(count) {
     });
 }
 
+// jquery ajax
 mission_count = {}
 $.ajax({
     url: "{{route('mission_count')}}",
@@ -148,6 +168,7 @@ $.ajax({
     plot(data);
 });
 
+// Pie chart
 new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
@@ -156,7 +177,7 @@ new Chart(document.getElementById("doughnut-chart"), {
         {
           label: "Frequency",
           backgroundColor: ["#3cba9f", "#3e95cd", "#8e5ea2", "#e8c3b9","#c45850"],
-          data: [478,267]
+          data: [42,18]
         }
       ]
     },
@@ -168,6 +189,95 @@ new Chart(document.getElementById("doughnut-chart"), {
     }
 });
 
+// Bar chart 
+var bar_plot = function(count) {
+            var ctx = $('#bar_chart');
+            ctx[0].height = 120;
+            data = count.count;
+            labels =  count.district;
+
+    var stackedBar = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Count',
+                data: data,
+                backgroundColor: [
+                'rgba(252, 38, 73, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 255, 65, 0.2)',
+                'rgba(128, 255, 65, 0.2)',
+                'rgba(54, 226, 83, 0.2)',
+                'rgba(37, 223, 167, 0.2)',
+                'rgba(37, 192, 223, 0.2)',
+                'rgba(37, 155, 223, 0.2)',
+                'rgba(61, 172, 255, 0.2)',
+                'rgba(61, 120, 255, 0.2)',
+                'rgba(101, 153, 255, 0.2)',
+                'rgba(101, 127, 255, 0.2)',
+                'rgba(192, 101, 200, 0.2)',
+                'rgba(219, 123, 193, 0.2)',
+                'rgba(219, 123, 139, 0.2)',
+                'rgba(201, 203, 207, 0.2)',
+                
+                ],
+                borderColor: [
+                'rgb(252, 38, 73)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 255, 65)',
+                'rgb(128, 255, 65)',
+                'rgb(54, 226, 83)',
+                'rgb(37, 223, 167)',
+                'rgb(37, 192, 223)',
+                'rgb(37, 155, 223)',
+                'rgb(61, 172, 255)',
+                'rgb(61, 120, 255)',
+                'rgb(101, 153, 255)',
+                'rgb(101, 127, 255)',
+                'rgb(192, 101, 200)',
+                'rgb(219, 123, 193)',
+                'rgb(219, 123, 139)',
+                'rgb(201, 203, 207)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    
+                },
+                scaleLabel: {
+                    display:     true,
+                    labelString: 'value'
+                },
+            }],
+                yAxes: [{
+                    scaleLabel: {
+                        display:     true,
+                        labelString: 'District'
+                    },
+                }]
+            }
+        }
+    });
+ }
+mission_count = {}
+$.ajax({
+    url:"/barchart_count",
+    method: "GET",
+}).done(function(data) {
+    mission_count = data;
+    console.log(data);
+    bar_plot(data);
+});
 </script>
 <script async
     src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=visualization&callback=initMap">
@@ -177,45 +287,53 @@ new Chart(document.getElementById("doughnut-chart"), {
         map = new google.maps.Map(document.getElementById('heatmap-canvas'), {
             zoom: 10.7,
             center: {lat: 22.3193, lng: 114.1694},
-            mapTypeId: 'terrain'
+            mapTypeId: google.maps.MapTypeId.TERRAIN
         });
 
-        var heatmap = new google.maps.visualization.HeatmapLayer({
-            data: heatmapData
-            });
-        heatmap.setMap(map);
-    }
-    /* Data points defined as an array of LatLng objects */
-    var heatmapData = [
-        new google.maps.LatLng(37.782, -122.447),
-        new google.maps.LatLng(37.782, -122.445),
-        new google.maps.LatLng(37.782, -122.443),
-        new google.maps.LatLng(37.782, -122.441),
-        new google.maps.LatLng(37.782, -122.439),
-        new google.maps.LatLng(37.782, -122.437),
-        new google.maps.LatLng(37.782, -122.435),
-        new google.maps.LatLng(37.785, -122.447),
-        new google.maps.LatLng(37.785, -122.445),
-        new google.maps.LatLng(37.785, -122.443),
-        new google.maps.LatLng(37.785, -122.441),
-        new google.maps.LatLng(37.785, -122.439),
-        new google.maps.LatLng(37.785, -122.437),
-        new google.maps.LatLng(37.785, -122.435)
-    ];
+        heatmap = new google.maps.visualization.HeatmapLayer({
+            data: getPoints(),
+            map: map
+        });
+        }
 
-    var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
+        function changeGradient() {
+        var gradient = [
+            'rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 1)',
+            'rgba(0, 191, 255, 1)',
+            'rgba(0, 127, 255, 1)',
+            'rgba(0, 63, 255, 1)',
+            'rgba(0, 0, 255, 1)',
+            'rgba(0, 0, 223, 1)',
+            'rgba(0, 0, 191, 1)',
+            'rgba(0, 0, 159, 1)',
+            'rgba(0, 0, 127, 1)',
+            'rgba(63, 0, 91, 1)',
+            'rgba(127, 0, 63, 1)',
+            'rgba(191, 0, 31, 1)',
+            'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+        }
+        
+        function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 30);
+        }
 
-    map = new google.maps.Map(document.getElementById('map'), {
-    center: sanFrancisco,
-    zoom: 8,
-    mapTypeId: 'satellite'
-    });
+        function changeOpacity() {
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        }
 
-    var heatmap = new google.maps.visualization.HeatmapLayer({
-    data: heatmapData
-    });
-    heatmap.setMap(map);
+        // Heatmap data
+        function getPoints() {
+            return [
+                @foreach ($latlng as $latlong)
+                    new google.maps.LatLng({{$latlong->Latitude}}, {{$latlong->Longitude}}),
+                @endforeach
+            ];
+        }
 </script>
+
 <script>
     $('#bologna-list a').on('click', function (e) {
         e.preventDefault()
