@@ -30,7 +30,6 @@
         overflow-x: hidden; /* Disable horizontal scroll */
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-        z-index: 1;
         }
 
         /* The sidebar links */
@@ -44,7 +43,7 @@
         }
 
         /* When you mouse over the navigation links, change their color */
-        .sidebar a:hover {
+        .sidebar a:hover.col {
         color: #f1f1f1;
         }
 
@@ -58,7 +57,7 @@
         }
         #main {
             transition: margin-left .5s;
-            padding: 16px;
+            padding: 10px;
         }
     </style>
     <!-- jquery 3.6 -->
@@ -140,7 +139,7 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle pl-4" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="col nav-link dropdown-toggle pl-4" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-cog"></i> Management
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
@@ -150,13 +149,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/mission') }}"><i class="fas fa-map-marked-alt"></i> View Mission</a>
+                    <a class="col" href="{{ url('/mission') }}"><i class="fas fa-map-marked-alt"></i> View Mission</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/dv') }}"><i class="fas fa-poll"></i> Dashborad</a>
+                    <a class="col" href="{{ url('/dv') }}"><i class="fas fa-poll"></i> Dashborad</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/intro') }}"><i class="fab fa-battle-net"></i> Introduction</a>
+                    <a class="col" href="{{ url('/intro') }}"><i class="fab fa-battle-net"></i> Introduction</a>
                 </li>
             </ul>
             

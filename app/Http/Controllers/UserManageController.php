@@ -39,7 +39,12 @@ class UserManageController extends Controller
 
     public function create()
     {
-        return view('account.create');
+        if(auth()->user()->Role=='admin'){
+            return view('account.create');
+        } else {
+            abort(403);
+        }
+        
     }
 
     public function store(Request $request)

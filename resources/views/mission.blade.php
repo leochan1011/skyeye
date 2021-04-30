@@ -28,9 +28,11 @@
                 </div>
                 
                 <div class="card-body">
-                    Location Name: {{ $mission_info->MLocationName}}
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-outline-primary" href="{{ url("/mission/{$mission_info->MID}") }}" role="button">View</a>
+                    <b> Location Name:</b> {{ $mission_info->MLocationName}}<br>
+                    <b> Description:</b> {{$mission_info->MDESC}}
+
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <a class="btn btn-outline-primary shadow-sm" href="{{ url("/mission/{$mission_info->MID}") }}" role="button">View</a>
                     </div>
                 </div>
             </div>

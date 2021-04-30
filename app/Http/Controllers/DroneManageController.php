@@ -15,7 +15,12 @@ class DroneManageController extends Controller
 
     public function create()
     {
-        return view('drone.create');
+        if(auth()->user()->Role=='admin'){
+            return view('drone.create');
+        } else{
+            abort(403);
+        }
+        
     }
 
     public function store(Request $request)
@@ -33,8 +38,13 @@ class DroneManageController extends Controller
 
     public function edit($DroneID)
     {
-        $user = DB::select("select * from Drone WHERE DroneID = '$DroneID'" );
-        return view('drone.edit', ['drone' => $user[0]]);
+        if(auth()->user()->Role=='admin'){
+            $user = DB::select("select * from Drone WHERE DroneID = '$DroneID'" );
+            return view('drone.edit', ['drone' => $user[0]]);
+        } else {
+            abort(403);
+        }
+        
     }
 
     public function update(Request $request, $DroneID)
@@ -50,7 +60,12 @@ class DroneManageController extends Controller
 
     public function destroy($DroneID)
     {
-        $user = DB::table('Drone')->where('DroneID', $DroneID)->delete();
-        return redirect('/drone')->with('completed', 'User has been deleted');
+        if(auth()->user()->Role=='admin'){
+            $user = DB::table('Drone')->where('DroneID', $DroneID)->delete();
+            return redirect('/drone')->with('completed', 'User has been deleted');
+        } else {
+            abort(403);
+        }
+        
     }
 }
