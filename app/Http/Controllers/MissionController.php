@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use App\Classes\LonLatCalculator;
 use Illuminate\Http\Request;
 
 class MissionController extends Controller
@@ -18,10 +19,72 @@ class MissionController extends Controller
     // Show each row of the data
     public function show($id){
         $mission_Detail = DB::select("select * from Mission WHERE MID = '$id'" );
-        $token='c9d33c1b95202bf37815c9c80c6be010';
         $mid = $id;
-        $json = file_get_contents($url = 'http://localhost/ogweb/application/waypoint/get.php?token='.$token.'&mid='.$mid);
-        $json = json_decode($json,true);
+        $sql = DB::table('Mission')->select('CenterLat', 'CenterLng', 'MRange')
+                ->where('MID','=',$id)->get();
+        $lat = $sql->pluck('CenterLat')[0];
+        $lng = $sql->pluck('CenterLng')[0];
+        $radius = $sql->pluck('MRange')[0];
+
+    function waypoint($lon, $lat, $dist){
+        $test = new LonLatCalculator;
+        $loc_array = [];
+        $brng = 0;
+        array_push($loc_array,Array("Latitude" => $lat, "Longitude" => $lon));
+        $newlon = 0;
+        $newlat = 0;
+    
+        $test->computerThatLonLat($lon, $lat, $brng, $dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        $brng = 120;
+        $test->computerThatLonLat($newlon, $newlat, $brng, $dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        $brng = 240;
+        $test->computerThatLonLat($newlon, $newlat, $brng,2 * $dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        $brng = 0;
+        $test->computerThatLonLat($newlon, $newlat, $brng,$dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        $brng = 120;
+        $test->computerThatLonLat($newlon, $newlat, $brng,2 * $dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        $brng = 240;
+        $test->computerThatLonLat($newlon, $newlat, $brng,$dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        $brng = 0;
+        $test->computerThatLonLat($newlon, $newlat, $brng,$dist);
+        $newlon = $test->getLongitude();
+        $newlat = $test->getLatitude();
+        array_push($loc_array,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+        return $loc_array;
+    }
+    $result = waypoint($lng, $lat, $radius);
+            if(sizeof($result) > 0){
+                $json = array("status"=>0, "result"=>$result);
+            }else{
+                $json = array("status"=>1);
+            }
+        // $json = file_get_contents($url = 'http://127.0.0.1:8000/wayp/'.$mid);
+        // $json = json_decode($json,true);
         $json = $json['result'];
         return view('mDetail', ['mDetail' => $mission_Detail[0]],
                                 ['wayp' => $json]);
