@@ -36,15 +36,6 @@
       height: 200px;
       overflow: hidden;
   }
-  .profile-card-3 .background-block .background {
-    width:100%;
-    vertical-align: top;
-    opacity: 0.9;
-    -webkit-filter: blur(0.5px);
-    filter: blur(0.5px);
-    -webkit-transform: scale(1.8);
-    transform: scale(2.8);
-  }
   .profile-card-3 .card-content {
     width: 100%;
     padding: 15px 25px;
@@ -54,7 +45,7 @@
     height:50%;
     border-radius:0 0 5px 5px;
     position: relative;
-    z-index: 9999;
+    z-index: 100;
   }
   .profile-card-3 .card-content::before {
       content: '';
@@ -80,17 +71,12 @@
     border: 2px solid rgb(255, 255, 255);
     -webkit-transform: translate(-50%, 0%);
     transform: translate(-50%, 0%);
-    z-index:99999;
+    z-index:101;
   }
   .profile-card-3 h2 {
     margin: 0 0 5px;
     font-weight: 600;
     font-size:25px;
-  }
-  .profile-card-3 h2 small {
-    display: block;
-    font-size: 15px;
-    margin-top:10px;
   }
 </style>
 <div class="container">

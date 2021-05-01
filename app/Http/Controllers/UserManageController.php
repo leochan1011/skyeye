@@ -72,8 +72,13 @@ class UserManageController extends Controller
 
     public function edit($UserID)
     {
-        $user = DB::select("select * from UserAccount WHERE id = '$UserID'" );
-        return view('account.edit', ['user' => $user[0]]);
+        if(auth()->user()->Role=='admin'){
+            $user = DB::select("select * from UserAccount WHERE id = '$UserID'" );
+            return view('account.edit', ['user' => $user[0]]);
+        } else {
+            abort(403);
+        }
+        
         //$user = User::findOrFail($id);
         //return view('account.edit', compact('user'));
     }
@@ -97,10 +102,16 @@ class UserManageController extends Controller
 
     public function destroy($UserID)
     {
+        if(auth()->user()->Role=='admin'){
+            $user = DB::table('UserAccount')->where('id', $UserID)->delete();
+            return redirect('/users')->with('completed', 'User has been deleted');
+        } else {
+            abort(403);
+        }
         //$user = DB::table('UserAccount')->findOrFail($UserID);
-        $user = DB::table('UserAccount')->where('id', $UserID)->delete();
+        
         //$user->delete();
 
-        return redirect('/users')->with('completed', 'User has been deleted');
+        
     }
 }

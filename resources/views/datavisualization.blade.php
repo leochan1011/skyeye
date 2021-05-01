@@ -91,7 +91,7 @@
         <div class="tab-content">
             <div class="tab-pane active" id="month" role="tabpanel">
                 <div>            
-                    {{-- <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div> --}}
+                    <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div>
                 </div>
             </div>    
         </div>

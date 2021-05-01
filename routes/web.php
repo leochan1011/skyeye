@@ -24,32 +24,25 @@ use Illuminate\Support\Facades\DB;
 
 
 Route::get('/test', function () {
-    $data = DB::table('Mission')->select(DB::raw('`MLocationName`,count(`MLocationName`) as `count`'))
-                     ->whereNotNull('MLocationName')->Groupby('MLocationName')->orderByDesc('count')->get();
-    $district = $data->pluck('MLocationName');
-    $count = $data->pluck('count');
-    //return ['district'=>$district,
-            //'count'=>$count];
-    return view('test',['district'=>$district,
-    'count'=>$count]);
+    return view('test');
 });
 
 Route::get('/intro', function () {
     return view('welcome');
-});
+})->middleware('auth');
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::resource('users', UserManageController::class);
-Route::resource('drone', DroneManageController::class);
+Route::resource('users', UserManageController::class)->middleware('auth');
+Route::resource('drone', DroneManageController::class)->middleware('auth');
 Route::get('/user/username={name} pw={pw}',[UserInfoController::class, 'self']);
 // Route::get('/user_info', [UserInfoController::class, 'index'])->middleware('auth');
 
 Route::get('/mission', [MissionController::class, 'index'])->middleware('auth');
-Route::get('/mission/{id}', [MissionController::class, 'show']);
+Route::get('/mission/{id}', [MissionController::class, 'show'])->middleware('auth');
 
 
-Route::get('/dv', [MissionreportController::class, 'report']);
+Route::get('/dv', [MissionreportController::class, 'report'])->middleware('auth');
 
 Route::get('/mission_count', [MissionController::class, 'getMissionCount'])->name('mission_count');
 Route::get('/mission_count2', [MissionController::class, 'getMissionCount2'])->name('mission_count2');
