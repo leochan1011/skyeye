@@ -87,16 +87,16 @@
             <div class="background-block" style="background-image:linear-gradient(to top right,#e66465, #9198e5);">
               <div class="background"></div>
             </div>
-            <a href="{{url('/intro')}}" class="text-dark">
+            <a href="{{url('//127.0.0.1:5000')}}" class="text-dark">
               <div class="profile-thumb-block" style="font-size: 25px;">
                 <i class="fab fa-battle-net fa-3x profile"></i>
               </div>
             </a>
             
             <div class="card-content">
-              <h2>Skyeye Introduction</h2>
+              <h2>Real-time Monitoring</h2>
               <div class="icon-block mt-5">
-                <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/intro') }}" role="button">View</a>
+                <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('//127.0.0.1:5000') }}" role="button">View</a>
               </div>
             </div>
         </div>
@@ -169,11 +169,13 @@
           <div class="background-block" style="background-image:linear-gradient(to top right,#e264e6, #e59191);">
               <div class="background"></div>
           </div>
-          <div class="profile-thumb-block" style="font-size: 25px;">
-            <i class="fas fa-poll fa-3x profile"></i>
-          </div>
+          <a href="{{url('/dv')}}" class="text-dark">
+            <div class="profile-thumb-block" style="font-size: 25px;">
+              <i class="fas fa-poll fa-3x profile"></i>
+            </div>
+          </a>
           <div class="card-content">
-          <h2>Mission Analytics</h2>
+          <h2>Mission Analysis</h2>
             <div class="icon-block mt-5">
               <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/dv') }}" role="button">View</a>
             </div>

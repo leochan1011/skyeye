@@ -12,14 +12,14 @@
             <div class="">
                 <form action="{{url('mission')}}" method="GET" role="search">
 
-                    <div class="input-group">
-                        <span class="input-group-btn mr-5 mt-1">
+                    <div class="input-group ">
+                        <span class="input-group-btn mr-2 ">
                             <button class="btn btn-info" type="submit" title="Search projects">
                                 <span class="fas fa-search"></span>
                             </button>
                         </span>
-                        <input type="text" class="form-control mr-2" name="term" placeholder="Search Mission ID" id="term">
-                        <a href="{{url('mission')}}" class=" mt-1">
+                        <input type="text" class="form-control mr-2" name="term" placeholder="Search Mission ID / Name / Location" id="term">
+                        <a href="{{url('mission')}}" class="rese">
                             <span class="input-group-btn">
                                 <button class="btn btn-danger" type="button" title="Refresh page">
                                     <span class="fas fa-sync-alt"></span>

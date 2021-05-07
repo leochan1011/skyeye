@@ -12,7 +12,8 @@
     --percentage: 0%;
 }
 .bgimg {
-    background-image: url('/img/wallpaper.jpg');
+    // background-image: url('/img/wallpaper.jpg');
+    background-image: url('/img/hill.jpeg');
     min-height: 800px; 
     background-attachment: fixed;
     background-position: center;
@@ -28,18 +29,23 @@ h3.title-confi{
     margin-top: 50%;
     letter-spacing: 0.3px;
 
-    background-image: linear-gradient(75deg, rgba(255,255,255,1)0%,
-    rgba(255,255,255,1)33.33%,rgba(255,255,255,0)66.67%,
-    rgba(255,255,255,0)100%);
+    background-image: linear-gradient(75deg, rgb(33, 235, 167)0%,
+    rgb(33, 235, 167)33.33%,rgb(220, 245, 110)66.67%,
+    rgba(220, 245, 110)100%);
 
     background-size: 300% 100%;
+    // background-position-x: 100%;
     background-position-x: calc(100% - var(--percentage));
+    // transition: 2s background-position-x ease-in-out;
 
     background-clip: text;
     -webkit-background-clip: text;
 
     color: transparent;
 }
+// h3.title-confi:hover{
+//     background-position-x: 0%;
+// }
 
 .video-event{
     height: 300vh;

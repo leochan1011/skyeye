@@ -20,7 +20,8 @@ class MissionController extends Controller
         $term = $request->term;
         $mission = DB::table('Mission')->leftJoin('UserAccount', 'Mission.MCreator', '=', 'UserAccount.id')
         ->select('Mission.*', 'UserAccount.uname')->Where('Mission.MID', 'LIKE', $term)
-            
+        ->orWhere('Mission.MNAME','Like','%'.$term.'%')
+        ->orWhere('Mission.MLocationName','Like','%'.$term.'%')
         ->orderBy('MID','desc')->get();
         
 

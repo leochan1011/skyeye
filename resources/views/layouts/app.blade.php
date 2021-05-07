@@ -212,6 +212,7 @@
                         <a class="dropdown-item" href="{{ url('/users/create') }}"><i class="fas fa-user-plus"></i> Create User</a>
                         <a class="dropdown-item" href="{{ url('/users') }}"><i class="fas fa-user-edit"></i> View/Eidt User</a>
                         <a class="dropdown-item" href="{{ url('/drone/create') }}"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Create Drone</a>
+                        <a class="dropdown-item" href="{{ url('/drone') }}"><i class="fa fa-fire" aria-hidden="true"></i> View/Eidt Drone</a>
                     </div>
                     </li>
                     <li class="nav-item">

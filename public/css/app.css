@@ -10908,7 +10908,7 @@ a.text-dark:focus {
 }
 
 .bgimg {
-  background-image: url("/img/wallpaper.jpg");
+  background-image: url("/img/hill.jpeg");
   min-height: 800px;
   background-attachment: fixed;
   background-position: center;
@@ -10923,7 +10923,7 @@ h3.title-confi {
   min-height: 80vh;
   margin-top: 50%;
   letter-spacing: 0.3px;
-  background-image: linear-gradient(75deg, white 0%, white 33.33%, rgba(255, 255, 255, 0) 66.67%, rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(75deg, #21eba7 0%, #21eba7 33.33%, #dcf56e 66.67%, #dcf56e 100%);
   background-size: 300% 100%;
   background-position-x: calc(100% - var(--percentage));
   background-clip: text;

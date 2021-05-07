@@ -20,7 +20,8 @@
             <tr class="table-primary">
               <td>ID</td>
               <td>Serial Number</td>
-    
+              <td>Model</td>
+              <td>Status</td>
               <td class="text-center">Action</td>
             </tr>
         </thead>
@@ -29,6 +30,8 @@
             <tr>
                 <td>{{$uav->DroneID}}</td>
                 <td>{{$uav->DSerialNumber}}</td>
+                <td>{{$uav->Model}}</td>
+                <td><span class="badge rounded-pill bg-success">{{$uav->DStatus == 0 ? 'Standby' : 'Ongoing'}}</span></td>
                 <td class="text-center">
                     <a href="{{ route('drone.edit', $uav->DroneID)}}" class="btn btn-primary btn-sm">Edit</a>
                     <form action="{{ route('drone.destroy', $uav->DroneID)}}" method="post" onsubmit="return confirm('Do you really want to delete this entry?');" style="display: inline-block">
