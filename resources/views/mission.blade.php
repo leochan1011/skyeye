@@ -7,6 +7,30 @@
     }
 </style>
 <div class="container">
+    <div class="col-md-6 offset-md-3 mb-3">
+        <div class="mx-auto pull-right">
+            <div class="">
+                <form action="{{url('mission')}}" method="GET" role="search">
+
+                    <div class="input-group">
+                        <span class="input-group-btn mr-5 mt-1">
+                            <button class="btn btn-info" type="submit" title="Search projects">
+                                <span class="fas fa-search"></span>
+                            </button>
+                        </span>
+                        <input type="text" class="form-control mr-2" name="term" placeholder="Search Mission ID" id="term">
+                        <a href="{{url('mission')}}" class=" mt-1">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="button" title="Refresh page">
+                                    <span class="fas fa-sync-alt"></span>
+                                </button>
+                            </span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach ($mission_info as $mission_info)
@@ -28,8 +52,9 @@
                 </div>
                 
                 <div class="card-body">
-                    <b> Location Name:</b> {{ $mission_info->MLocationName}}<br>
-                    <b> Description:</b> {{$mission_info->MDESC}}
+                    <b><u>Mission ID:</u></b> {{$mission_info->MID}}<br>
+                    <b><u>Location Name:</u></b> {{ $mission_info->MLocationName}}<br>
+                    <b><u>Description:</u></b> {{$mission_info->MDESC}}
 
                     <div class="d-flex justify-content-between align-items-center mt-2">
                         <a class="btn btn-outline-primary shadow-sm" href="{{ url("/mission/{$mission_info->MID}") }}" role="button">View</a>

@@ -25,7 +25,7 @@
               <input type="text" class="form-control" name="name" value="{{ $user->UNAME }}"/>
           </div>
           <div class="form-group">
-              <label for="sid">Stuff ID</label>
+              <label for="sid">Staff ID</label>
               <input type="text" class="form-control" name="sid" value="{{ $user->SID }}"/>
           </div>
           <div class="form-group">

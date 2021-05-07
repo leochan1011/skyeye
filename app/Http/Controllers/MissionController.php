@@ -9,11 +9,25 @@ use Illuminate\Http\Request;
 class MissionController extends Controller
 {
     // Show all the mission data
-    public function index(){
-        //$mission = DB::select('select * from Mission ', [1]);
-        $mission = DB::table('Mission')->leftJoin('UserAccount', 'Mission.MCreator', '=', 'UserAccount.id')->select('Mission.*', 'UserAccount.uname')->get();
-        return view('mission', ['mission_info' => $mission]);  
-        //return dd($mission);
+    // public function index(){
+        
+    //     $mission = DB::table('Mission')->leftJoin('UserAccount', 'Mission.MCreator', '=', 'UserAccount.id')->select('Mission.*', 'UserAccount.uname')->get();
+    //     return view('mission', ['mission_info' => $mission]);  
+        
+    // }
+
+    public function index(Request $request){
+        $term = $request->term;
+        $mission = DB::table('Mission')->leftJoin('UserAccount', 'Mission.MCreator', '=', 'UserAccount.id')
+        ->select('Mission.*', 'UserAccount.uname')->Where('Mission.MID', 'LIKE', $term)
+            
+        ->orderBy('MID','desc')->get();
+        
+
+        // $mission = DB::table('Mission')->leftJoin('UserAccount', 'Mission.MCreator', '=', 'UserAccount.id')->select('Mission.*', 'UserAccount.uname')->get();
+        return view('mission', ['mission_info'=>$mission])
+                    ->with('i',(request()->input('page',1)-1)*5);  
+        
     }
 
     // Show each row of the data

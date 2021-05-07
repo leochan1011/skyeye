@@ -16,10 +16,16 @@
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+            .container p{
+                font-family: 'Open Sans', sans-serif;
+            }
+        </style>
     </head>
     <body class="antialiased text-white bg-dark">
         <div class="welcome">
@@ -111,22 +117,23 @@
                 <!-- Container (About Section) -->
             <div class="container padding-64">
                 <h3 class="row col">ABOUT SKYEYE</h3>
-                <p class="row col"><em>AN Enhancement of Mountain Rescues System</em></p>
-                <p style="height:850px;font-size:36px ">This project is an enhancement project designed to improve the effectiveness of mountain rescues searching the victims. 
-                    With drone, AI vision and Internet of things (IoT) techniques implemented, reduce the risk of rescuer being injured can be safer while dispatch searching 
-                    operation in an extreme terrain area and the effectiveness on searching can be more accurate as of the object detection feature which power by AI vision. 
-                    It enables to assist rescuer in identifying victims quickly. What is more, route planning also as part of our enhancement. The best route for drone can 
-                    optimize the drone operation performance that less power consumption and shorten time to reach the accident's location. </p>
+                <p class="row col">Search and Rescues System</p>
+                <p style="height:850px;font-size:36px ">Real-time video analytics on small autonomous drones poses several difficult challenges at the 
+                    intersection of wireless bandwidth, processing capacity, energy consumption, result accuracy, and timeliness of results. In response 
+                    to these challenges, we describe four strategies to build an adaptive computer vision pipeline for search tasks in domains such as 
+                    search-and-rescue, surveillance, and wildlife conservation. Our experimental results show that a judicious combination of drone-based 
+                    processing and edge-based processing can save substantial wireless bandwidth and thus improve scalability, without compromising result 
+                    accuracy or result latency. </p>
             </div>   
             
             <div class="video-event">
                 <section id="chip-section">
-                    <!-- <video src="http://www.apple.com/105/media/cn/iphone-se/2020/90024c0f-285a-4bf5-af04-2c38de97b06e/anim/arcade-loop/large.mp4" muted playsinline autoplay loop ></video>
-                    -->
+                    {{-- <video src="http://www.apple.com/105/media/cn/iphone-se/2020/90024c0f-285a-4bf5-af04-2c38de97b06e/anim/arcade-loop/large.mp4" muted playsinline autoplay loop ></video> --}}
+                    
                     <video src="{{'/img/od_video.mp4'}}" muted playsinline autoplay loop ></video>
                     <h1 class="video-text">
                         Object detection is wonderful.<br>
-                        Let view about it.
+                        Let's view about it.
                     </h1>
                     <div id="the-chip">
                         <img src="{{'/svg/selfuav.svg'}}" id="UAV" >

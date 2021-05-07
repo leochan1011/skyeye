@@ -87,9 +87,12 @@
             <div class="background-block" style="background-image:linear-gradient(to top right,#e66465, #9198e5);">
               <div class="background"></div>
             </div>
-            <div class="profile-thumb-block" style="font-size: 25px;">
-              <i class="fab fa-battle-net fa-3x profile"></i>
-            </div>
+            <a href="{{url('/intro')}}" class="text-dark">
+              <div class="profile-thumb-block" style="font-size: 25px;">
+                <i class="fab fa-battle-net fa-3x profile"></i>
+              </div>
+            </a>
+            
             <div class="card-content">
               <h2>Skyeye Introduction</h2>
               <div class="icon-block mt-5">
@@ -104,9 +107,11 @@
             <div class="background-block" style="background-image:linear-gradient(to top right,#64d7e6, #bae591);">
                 <div class="background"></div>
             </div>
-            <div class="profile-thumb-block" style="font-size: 16px;">
-                    <i class="fas fa-user-cog fa-4x profile"></i>
-            </div>
+            <a href="{{url('/users')}}" class="text-dark">
+              <div class="profile-thumb-block" style="font-size: 16px;">
+                      <i class="fas fa-user-cog fa-4x profile"></i>
+              </div>
+            </a>
             <div class="card-content">
                     <h2>User Management</h2>
                         <div class="icon-block mt-5">
@@ -123,9 +128,11 @@
           <div class="background-block" style="background-image:linear-gradient(to top right,#ac64e6, #91d4e5);">
             <div class="background"></div>
           </div>
-          <div class="profile-thumb-block">
-            <img src="/img/Drone.png" class="profile" alt="">
-          </div>
+          <a href="{{url('/drone')}}" class="text-dark">
+            <div class="profile-thumb-block">
+              <img src="/img/Drone.png" class="profile" alt="">
+            </div>
+          </a>
           <div class="card-content">
             <h2>Drone Management</h2>
             <div class="icon-block mt-5">
@@ -142,9 +149,11 @@
             <div class="background-block" style="background-image:linear-gradient(to top right,#d3e664, #91e5d3);">
                 <div class="background"></div>
             </div>
-            <div class="profile-thumb-block" style="font-size: 22px;">
-                    <i class="fas fa-map-marked-alt fa-3x profile"></i>
-            </div>
+            <a href="{{url('/mission')}}" class="text-dark">
+              <div class="profile-thumb-block" style="font-size: 22px;">
+                      <i class="fas fa-map-marked-alt fa-3x profile"></i>
+              </div>
+            </a>
             <div class="card-content">
                     <h2>Mission Record</h2>
                         <div class="icon-block mt-5">
@@ -164,7 +173,7 @@
             <i class="fas fa-poll fa-3x profile"></i>
           </div>
           <div class="card-content">
-          <h2>Data Visualization</h2>
+          <h2>Mission Analytics</h2>
             <div class="icon-block mt-5">
               <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/dv') }}" role="button">View</a>
             </div>
