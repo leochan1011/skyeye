@@ -1,3 +1,7 @@
+{{-- Created by Laravel.
+    User: Leo
+    Date: 11/3/2020--}}
+
 @extends('layouts.app')
 
 @section('content')
@@ -59,7 +63,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{-- {{ __('Forgot Your Password?') }} --}}
                                     </a>
                                 @endif
                             </div>

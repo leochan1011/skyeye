@@ -27,9 +27,11 @@ class DroneManageController extends Controller
     {
         $storeData = $request->validate([
             'SerialNum' => 'required|max:255',
+            'Model' => 'required|max:255',
         ]);
         $user = DB::table('Drone')->insert([
             'DSerialNumber' => $storeData['SerialNum'],
+            'Model' => $storeData['Model'],
             'DStatus' => 0,
         ]);
 
@@ -51,9 +53,11 @@ class DroneManageController extends Controller
     {
         $updateData = $request->validate([
             'SerialNum' => 'required|max:255',
+            'Model' => 'required|max:255',
         ]);
         DB::table('Drone')->where('DroneID', $DroneID)->update([
             'DSerialNumber' => $updateData['SerialNum'],
+            'Model' => $updateData['Model'],
         ]);
         return redirect('/drone')->with('completed', 'Drone has been updated');
     }

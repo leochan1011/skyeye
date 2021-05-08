@@ -221,6 +221,7 @@
                     <li class="nav-item">
                         <a class="col" href="{{ url('/dv') }}"><i class="fas fa-poll"></i> Dashborad</a>
                     </li>
+                    <hr>
                     <li class="nav-item">
                         <a class="col" href="{{ url('/intro') }}"><i class="fab fa-battle-net"></i> About SKYEYE</a>
                     </li>

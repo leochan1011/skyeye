@@ -29,6 +29,7 @@
     </head>
     <body class="antialiased text-white bg-dark">
         <div class="welcome">
+            <a href="#" id="toTopBtn" class="cd-top text-replace js-cd-top cd-top--is-visible cd-top--fade-out" data-abc="true"></a>
             <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
                 <div class="container">
                     <a class="navbar-brand d-flex flex-row" href="{{ url('/') }}">

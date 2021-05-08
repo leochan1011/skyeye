@@ -1,5 +1,8 @@
 <?php
-
+/*  Created by Laravel.
+    User: Leo
+    Date: 10/11/2020
+*/ 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\UserManageController;

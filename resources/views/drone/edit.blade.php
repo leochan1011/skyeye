@@ -25,6 +25,10 @@
               <!-- db column name -->
               <input type="text" class="form-control" name="SerialNum" value="{{ $drone->DSerialNumber }}"/>
           </div>
+          <div class="form-group">
+              <label for="model">Model Name</label>
+              <input type="text" class="form-control" name="Model" value="{{ $drone->Model }}"/>
+          </div>
 
           <button type="submit" class="btn btn-block btn-primary">Update Drone</button>
       </form>

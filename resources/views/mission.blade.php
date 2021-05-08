@@ -46,7 +46,7 @@
                             {{ $mission_info->MCreateTime}}
                         </div>
                         <div class="col-md text-right">
-                            <small class="text-muted">{{ $mission_info->uname}}</small>
+                            <small class="text-muted">Created by {{ $mission_info->uname}}</small>
                         </div>
                       </div>
                 </div>

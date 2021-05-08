@@ -1,29 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="row justify-content-center mb-3">
-    <div class="col-md-4">
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Doughnut Chart</a>
-                </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <div class="tab-content">
-                <div class="tab-pane active" id="month" role="tabpanel">
-                    <div>
-                        <canvas id="doughnut-chart" height="315"></canvas>
-                    </div>
-                </div>    
+<div class="col-xl-2 mb-4 offset-2">
+    <div class="card border-success shadow-sm">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col">
+                    <small><div class="font-weight-bold text-success text-uppercase mb-1">
+                        Total Mission Count</div></small>
+                    <div class="h5 mb-0 font-weight-bold text-muted">{{count($latlng)}}</div>
+                </div>
+                <div class="mr-2">
+                    <i class="fas fa-flag fa-2x text-muted"></i>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+</div>
+<div class="row justify-content-center mb-3">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between">
+                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" role="tab" aria-controls="month" aria-selected="true">Heat Map</a>
+                    </li>
+                </ul>
+                <div class="panel">
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeGradient()">Change gradient</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeRadius()">Change radius</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeOpacity()">Change opacity</button>
+                </div> 
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="month" role="tabpanel">
+                        <div>            
+                            <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
         <div class="card shadow-sm">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
@@ -45,55 +66,54 @@
     </div>
 
 </div>
-
-<div class="card shadow-sm mb-3">
-    <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Time-Series</a>
-        </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link"  href="#day" role="tab" aria-controls="day" aria-selected="false">Day</a>
-        </li> --}}
-        </ul>
-    </div>
-    <div class="card-body">
-
-        <div class="tab-content mt-3">
-        <div class="tab-pane active" id="month" role="tabpanel">
-            <div class="row justify-content-center pb-3">
-                <canvas id="myChart" width="250" height="350"></canvas>
+<div class="row justify-content-center mb-3">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Doughnut Chart</a>
+                </li>
+                </ul>
             </div>
-        </div>
-        {{-- <div class="tab-pane" id="day" role="tabpanel" aria-labelledby="day-tab">  
-            <div class="row justify-content-center pb-3">
-                <div id="myChart2" width="250" height="250"></div>
-            </div>
-        </div>       --}}
-        </div>
-    </div>
-</div>
-
-<div class="card shadow-sm mt-3">
-    <div class="card-header d-flex justify-content-between">
-        <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" href="#" role="tab" aria-controls="month" aria-selected="true">Heat Map</a>
-            </li>
-        </ul>
-        <div class="panel">
-            <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeGradient()">Change gradient</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeRadius()">Change radius</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeOpacity()">Change opacity</button>
-        </div> 
-    </div>
-    <div class="card-body">
-        <div class="tab-content">
-            <div class="tab-pane active" id="month" role="tabpanel">
-                <div>            
-                    <div id="heatmap-canvas" style="height: 600px; width: 100%; position: relative; overflow: hidden;"></div>
+            <div class="card-body">
+                <div class="tab-content">
+                <div class="tab-pane active" id="month" role="tabpanel">
+                    <div>
+                        <canvas id="doughnut-chart" height="260"></canvas>
+                    </div>
+                </div>    
                 </div>
-            </div>    
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#month" role="tab" aria-controls="month" aria-selected="true">Time-Series</a>
+                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link"  href="#day" role="tab" aria-controls="day" aria-selected="false">Day</a>
+                </li> --}}
+                </ul>
+            </div>
+            <div class="card-body">
+        
+                <div class="tab-content mt-3">
+                <div class="tab-pane active" id="month" role="tabpanel">
+                    <div class="row justify-content-center pb-3">
+                        <canvas id="myChart" width="250" height="400"></canvas>
+                    </div>
+                </div>
+                {{-- <div class="tab-pane" id="day" role="tabpanel" aria-labelledby="day-tab">  
+                    <div class="row justify-content-center pb-3">
+                        <div id="myChart2" width="250" height="250"></div>
+                    </div>
+                </div>       --}}
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -149,7 +169,10 @@ var plot = function(count) {
             scales: {
                 xAxes: [{
                     type: 'time',
-                    distribution: 'series',
+                    // distribution: 'series',
+                    time: {
+                        unit: 'month'
+                    },
                     scaleLabel: {
                         display: true,
                         labelString: 'Date'
@@ -218,7 +241,7 @@ new Chart(document.getElementById("doughnut-chart"), {
 // Bar chart 
 var bar_plot = function(count) {
             var ctx = $('#bar_chart');
-            ctx[0].height = 120;
+            ctx[0].height = 200;
             data = count.count;
             labels =  count.district;
 
@@ -294,8 +317,11 @@ var bar_plot = function(count) {
             },
             title: {
                 display: true,
-                text: '18 District Mission Distribution'
-            }
+                text: 'Mission Distribution'
+            },
+            legend: {
+                display: false
+            },
         }
     });
  }

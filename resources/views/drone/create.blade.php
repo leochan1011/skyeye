@@ -25,6 +25,10 @@
                     <label for="SN">Serial Number</label>
                     <input type="text" class="form-control" name="SerialNum"/>
                 </div>
+                <div class="form-group">
+                    <label for="model">Model Name</label>
+                    <input type="text" class="form-control" name="Model"/>
+                </div>
     
                 <button type="submit" class="btn btn-block btn-primary">Create Drone</button>
             </form>

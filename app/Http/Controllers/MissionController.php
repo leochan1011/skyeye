@@ -98,12 +98,10 @@ class MissionController extends Controller
             }else{
                 $json = array("status"=>1);
             }
-        // $json = file_get_contents($url = 'http://127.0.0.1:8000/wayp/'.$mid);
-        // $json = json_decode($json,true);
+        
         $json = $json['result'];
         return view('mDetail', ['mDetail' => $mission_Detail[0]],
                                 ['wayp' => $json]);
-        //return dd($mission_Detail[0]);
     }
 
     public function getMissionCount() {
@@ -135,8 +133,9 @@ class MissionController extends Controller
         ->get();
 
         $count2 = $data2->pluck('count');
+        
         //Day
-        // $data2 = $data
+        // $data2 = DB::table('Mission')
         // ->select(DB::raw('count(*) as `count`'),  DB::raw('min(date(MCreateTime)) as date'))//,DB::raw('YEAR(MCreateTime) year'),DB::raw('MONTH(MCreateTime) month'),DB::raw('DAY(MCreateTime) day'))
         // ->groupBy(DB::raw('YEAR(MCreateTime)'), DB::raw('MONTH(MCreateTime)'), DB::raw('DAY(MCreateTime)'))
         // ->orderBy('date')
