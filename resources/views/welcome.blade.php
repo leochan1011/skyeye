@@ -107,7 +107,7 @@
             <div class="bg-dark">
                 <div class="container">
                     <div class="row align-items-center no-gutters">
-                        <div class="col-md-8 offset-md-3 "><h3 class="title-confi">Skyeye&nbsp;Project</h3></div>
+                        <div class="col-md-8 offset-md-3 "><h3 class="title-confi">SkyEye&nbsp;Project</h3></div>
                         <!-- First Parallax Image with Logo Text 
                         <img src="{{url('/img/wallpaper.jpg')}}" style="height: 700px; weight:100%; top: 0px;" class="bgimg" alt="Image" />-->
                         

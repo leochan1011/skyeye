@@ -35,8 +35,13 @@ class MissionController extends Controller
     public function show($id){
         $mission_Detail = DB::select("select * from Mission WHERE MID = '$id'" );
         $mid = $id;
-        $sql = DB::table('Mission')->select('CenterLat', 'CenterLng', 'MRange')
+        $sql = DB::table('Mission')->select('CenterLat', 'CenterLng', 'MRange', 'Patterns')
                 ->where('MID','=',$id)->get();
+        $sql2 = DB::table('Drone')->leftJoin('DroneMission', 'Drone.DroneID', '=', 'DroneMission.DroneID')
+        ->where('DroneMission.MID', '=', $id)
+        ->get();
+        $drone = sizeof($sql2);
+        $pattern = $sql->pluck('Patterns')[0];
         $lat = $sql->pluck('CenterLat')[0];
         $lng = $sql->pluck('CenterLng')[0];
         $radius = $sql->pluck('MRange')[0];
@@ -92,13 +97,181 @@ class MissionController extends Controller
     
         return $loc_array;
     }
-    $result = waypoint($lng, $lat, $radius);
-            if(sizeof($result) > 0){
-                $json = array("status"=>0, "result"=>$result);
-            }else{
-                $json = array("status"=>1);
-            }
+    function getwaypoin($drone, $lat, $lon, $radius){
+        $all_waypoint = [];
+            $waypoint1 = [];
+            $calculator = new LonLatCalculator;
+            $brng = 0;
+        switch ($drone) {
+            case 1:
+                            array_push($waypoint1,Array("Latitude" => $lat, "Longitude" => $lon));
+                            $newlon = 0;
+                            $newlat = 0;
+                            $brng = 225;
+    
+                            $calculator -> computerThatLonLat($lon, $lat, $brng, $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 0;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 90;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 180;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 90;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+    
+                            $brng = 0;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 90;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 180;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 90;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 0;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                array_push($all_waypoint,Array("Drone 1" => $waypoint1));
+                break;
+            case 2:
+    
+                            array_push($waypoint1,Array("Latitude" => $lat, "Longitude" => $lon));
+                            $newlon = 0;
+                            $newlat = 0;
+                            $brng = 0;
+    
+                            $calculator -> computerThatLonLat($lon, $lat, $brng, $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 270;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2 );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 180;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 270;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2 );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 0;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint1,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+    
+                            array_push($all_waypoint,Array("Drone 1" => $waypoint1));
+    
+                            $waypoint2 = [];
+    
+                            array_push($waypoint2,Array("Latitude" => $lat, "Longitude" => $lon));
+                            $newlon = 0;
+                            $newlat = 0;
+                            $brng = 180;
+    
+                            $calculator -> computerThatLonLat($lon, $lat, $brng, $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint2,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 90;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2 );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint2,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 0;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint2,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 90;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, $radius / 2 );
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint2,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            $brng = 180;
+                            $calculator -> computerThatLonLat($newlon, $newlat, $brng, 2 * $radius);
+                            $newlon = $calculator->getLongitude();
+                            $newlat = $calculator->getLatitude();
+                            array_push($waypoint2,Array("Latitude" => $newlat, "Longitude" => $newlon));
+    
+                            array_push($all_waypoint,Array("Drone 2" => $waypoint2));
+    
+                break;
+    
+        }
+        return $all_waypoint;
+    }
+    // $result = waypoint($lng, $lat, $radius);
+    //         if(sizeof($result) > 0){
+    //             $json = array("status"=>0, "result"=>$result);
+    //         }else{
+    //             $json = array("status"=>1);
+    //         }
         
+        
+        if($pattern == '0'){
+            $result = waypoint($lng, $lat, $radius);
+        }else if($pattern == '1'){
+            $result = getwaypoin($drone, $lat, $lng, $radius);
+        };
+        if(sizeof($result) > 0){
+            $json = array("status"=>0, "result"=>$result);
+        }else{
+            $json = array("status"=>1);
+        };
+
         $json = $json['result'];
         return view('mDetail', ['mDetail' => $mission_Detail[0]],
                                 ['wayp' => $json]);

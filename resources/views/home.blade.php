@@ -155,7 +155,7 @@
               </div>
             </a>
             <div class="card-content">
-                    <h2>Mission Record</h2>
+                    <h2>Mission Records</h2>
                         <div class="icon-block mt-5">
                             <a class="btn btn-outline-primary btn-lg shadow-sm" href="{{ url('/mission') }}" role="button">View</a>
                         </div>

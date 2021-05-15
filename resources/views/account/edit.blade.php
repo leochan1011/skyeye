@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class="container">
 <div class="card push-top">
   <div class="card-header">
     Edit & Update
@@ -17,6 +17,7 @@
         </ul>
       </div><br />
     @endif
+    
       <form method="post" action="{{ route('users.update', $user->id) }}">
           <div class="form-group">
               @csrf
@@ -44,5 +45,6 @@
           <button type="submit" class="btn btn-block btn-primary">Update User</button>
       </form>
   </div>
+</div>
 </div>
 @endsection

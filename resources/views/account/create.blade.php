@@ -21,7 +21,7 @@
           @endif
             <form method="post" action="{{ route('users.store') }}">
                 <div class="form-group">
-                    <label for="sid">Stuff ID</label>
+                    <label for="sid">Staff ID</label>
                     <input type="text" class="form-control" name="sid"/>
                 </div>
                 <div class="form-group">

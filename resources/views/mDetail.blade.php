@@ -11,14 +11,15 @@
                     Mission Detail
                 </div>
                 <div class="card-body">
-                    Mission Name: {{ $mDetail->MNAME}} <br>
-                    Started Time: {{ $mDetail->MStartTime}} <br>
-                    Location Name: {{ $mDetail->MLocationName}} <br>
-                    Center Latitude: {{ $mDetail->CenterLat}}<br>
-                    Center Longitude: {{ $mDetail->CenterLng}}<br>
-                    Finished Time: {{ $mDetail->MEndTime}}<br>
-                    Range: {{$mDetail->MRange}}<br>
-                    Altitude: {{$mDetail->MAltitude}}
+                    <b><u>Mission Name:</u></b> {{ $mDetail->MNAME}} <br>
+                    <b><u>Location Name:</u></b> {{ $mDetail->MLocationName}} <br>
+                    <b><u>Number of drone:</u></b> {{ count($wayp) == 2 ? 2 : 1 }} <br>
+                    <b><u>Center Latitude:</u></b> {{ $mDetail->CenterLat}}<br>
+                    <b><u>Center Longitude:</u></b> {{ $mDetail->CenterLng}}<br>
+                    <b><u>Started Time:</u></b> {{ $mDetail->MStartTime}} <br>
+                    <b><u>Finished Time:</u></b> {{ $mDetail->MEndTime}}<br>
+                    <b><u>Search Radius(M):</u></b> {{$mDetail->MRange}}<br>
+                    <b><u>Flight Altitude(M):</u></b> {{$mDetail->MAltitude}}
                 </div>
             </div>
             
@@ -117,9 +118,23 @@
         // Repeat the symbol at intervals of 20 pixels to create the dashed effect.
         const line = new google.maps.Polyline({
             path: [
-                @foreach ($wayp as $waypo)
+                @if (is_countable($wayp)&&count($wayp)==8)
+                    @foreach ($wayp as $waypo)
                     { lat: {{$waypo['Latitude']}}, lng: {{$waypo['Longitude']}} },
-                @endforeach
+                    @endforeach
+                @elseif (is_countable($wayp)&&count($wayp)==2)
+                   
+                    @foreach ($wayp[0]['Drone 1'] as $waypo)
+                    { lat: {{$waypo['Latitude']}}, lng: {{$waypo['Longitude']}} },
+                    @endforeach
+                    @foreach ($wayp[1]['Drone 2'] as $waypo)
+                    { lat: {{$waypo['Latitude']}}, lng: {{$waypo['Longitude']}} },
+                    @endforeach
+                @else 
+                    @foreach ($wayp[0]['Drone 1'] as $waypo)
+                    { lat: {{$waypo['Latitude']}}, lng: {{$waypo['Longitude']}} },
+                    @endforeach
+                @endif
             ],
             strokeOpacity: 0,
             icons: [
@@ -144,8 +159,38 @@
                 position: new google.maps.LatLng(victim_lat, victim_lng),
                 icon: victimimg,
                 map: map,
+                
             });
         }
+
+        // Mark Drone
+        var drone = new google.maps.MarkerImage( '/img/Drone1.png',null, null, null, new google.maps.Size(40,40));  
+        const beachMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(
+                @if (is_countable($wayp)&&count($wayp)==8)
+                
+                    {{$wayp[1]['Latitude']}}, {{$wayp[1]['Longitude']}} 
+                
+                @elseif (is_countable($wayp)&&count($wayp)==2)
+                    {{$wayp[0]['Drone 1'][2]['Latitude']}}, {{$wayp[0]['Drone 1'][2]['Longitude']}} 
+                
+                @else 
+                    {{$wayp[0]['Drone 1'][1]['Latitude']}}, {{$wayp[0]['Drone 1'][1]['Longitude']}}
+                @endif
+            ),
+            icon: drone,
+            map: map,
+        });
+        var drone2 = new google.maps.MarkerImage( '/img/Drone2.png',null, null, null, new google.maps.Size(40,40));
+        @if  (is_countable($wayp)&&count($wayp)==2)
+            const d2Marker = new google.maps.Marker({
+            position: new google.maps.LatLng(
+                {{$wayp[1]['Drone 2'][3]['Latitude']}}, {{$wayp[1]['Drone 2'][3]['Longitude']}} 
+            ),
+            icon: drone2,
+            map: map,
+            });
+        @endif
         
     }
 

@@ -15,6 +15,13 @@
     </div><br />
   @endif
   <div class="container">
+    <div style="margin-bottom: 10px;" class="row">
+      <div class="col-lg-12">
+          <a class="btn btn-success" href="drone/create">
+              Add Drone
+          </a>
+      </div>
+    </div>
     <table class="table">
         <thead>
             <tr class="table-primary">

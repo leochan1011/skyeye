@@ -152,7 +152,7 @@ var plot = function(count) {
                 borderColor: 'rgba(64, 36, 203, 1)',
                 lineTension: 0.1,
                 pointRadius: 4,
-                label: 'Creator 1',
+                label: 'Team A',
                 data: count.count1,
             },
             {
@@ -161,7 +161,7 @@ var plot = function(count) {
                 borderColor: 'rgba(203, 36, 36, 1)',
                 pointBackgroundColor: "white",
                 pointRadius: 4,
-                label: 'Creator 2',
+                label: 'Team B',
                 data: count.count2,
             }]
         },
